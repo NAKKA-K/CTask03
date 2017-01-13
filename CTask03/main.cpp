@@ -2,6 +2,7 @@
 #include"Keyboard.h"
 #include"scene_mgr.h"
 #include"menu.h"
+#include"game_main.h"
 
 //int font100;
 
@@ -11,7 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrecInstance, LPSTR lpCmdLine
 {
 	//初期設定★
 	SetGraphMode(1920, 1080, 16);            	//(必須)画面のサイズ設定
-	//ChangeWindowMode(TRUE);                	//()FullScreenではなくWindowで開く
+	ChangeWindowMode(TRUE);                	//()FullScreenではなくWindowで開く
 	if (DxLib_Init() == -1) return -1;            	//(必須)DXライブラリ初期化処理
 	SetDrawScreen(DX_SCREEN_BACK);    	//(必須)グラフィックの描画先を裏画面にセット
 
@@ -38,20 +39,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrecInstance, LPSTR lpCmdLine
 		case SCENE_LIST:
 
 			break;
-		
-		/*
-		case SCENE_PROGRAM:
-			DrawBox(0, 0, 2000, 1000, GetColor(0, 100, 100), TRUE);
-			break;
-		case SCENE_NETWORK:
-			DrawBox(0, 0, 2000, 1000, GetColor(0, 200, 100), TRUE);
-			break;
-		case SCENE_CIPHER:
-			DrawBox(0, 0, 2000, 1000, GetColor(50, 50, 50), TRUE);
-			break;
-		*/
-		}
 
+		//Game
+		case SCENE_GAME:
+			GameMain();
+			break;
+		}
 	}
 
 	DxLib_End();
