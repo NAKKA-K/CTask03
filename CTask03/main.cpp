@@ -3,6 +3,7 @@
 #include"scene_mgr.h"
 #include"menu.h"
 
+#include"font_list.h"
 //int font100;
 
 void Init();
@@ -11,11 +12,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrecInstance, LPSTR lpCmdLine
 {
 	//初期設定★
 	SetGraphMode(1920, 1080, 16);            	//(必須)画面のサイズ設定
-	//ChangeWindowMode(TRUE);                	//()FullScreenではなくWindowで開く
+	ChangeWindowMode(TRUE);                	//()FullScreenではなくWindowで開く
 	if (DxLib_Init() == -1) return -1;            	//(必須)DXライブラリ初期化処理
 	SetDrawScreen(DX_SCREEN_BACK);    	//(必須)グラフィックの描画先を裏画面にセット
-
+	SetMouseDispFlag(TRUE);						//マウスカーソルの表示
 	
+	FontList fontlist;	//クラスのコンストラクタを起動させるためだけに宣言
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && Keyboard_Get(KEY_INPUT_ESCAPE) == 0) {
 		Keyboard_Update();
