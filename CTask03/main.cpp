@@ -4,6 +4,7 @@
 #include"menu.h"
 #include"game_main.h"
 
+#include"font_list.h"
 //int font100;
 
 void Init();
@@ -15,8 +16,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrecInstance, LPSTR lpCmdLine
 	ChangeWindowMode(TRUE);                	//()FullScreenではなくWindowで開く
 	if (DxLib_Init() == -1) return -1;            	//(必須)DXライブラリ初期化処理
 	SetDrawScreen(DX_SCREEN_BACK);    	//(必須)グラフィックの描画先を裏画面にセット
-
+	SetMouseDispFlag(TRUE);						//マウスカーソルの表示
 	
+	FontList fontlist;	//クラスのコンストラクタを起動させるためだけに宣言
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && Keyboard_Get(KEY_INPUT_ESCAPE) == 0) {
 		Keyboard_Update();

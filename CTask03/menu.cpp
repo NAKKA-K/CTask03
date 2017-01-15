@@ -4,14 +4,22 @@
 #include"mode_select.h"
 #include<DxLib.h>
 
+#include"scene_mgr.h"
+#include"action_button.h"
+
 //extern int m_font100;
 
 void TitleScene()
 {
 	Title title;
-
+	
 	title.TitleGraph();
 	title.TitleKey();
+
+	/*Debug*/
+	ActionButton button;
+	button.DebugButton(button);
+
 	return;
 }
 
