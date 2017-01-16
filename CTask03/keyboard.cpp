@@ -1,4 +1,4 @@
-#include"Keyboard.h"
+#include"keyboard.h"
 #include<DxLib.h>
 
 static int m_Key[255];		//ƒL[‚Ì“ü—Íó‹µ•Û‘¶
