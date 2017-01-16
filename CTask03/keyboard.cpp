@@ -1,4 +1,3 @@
-//0G02029  ’†‘º ãÄ
 #include"Keyboard.h"
 #include<DxLib.h>
 
