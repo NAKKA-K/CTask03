@@ -8,6 +8,7 @@ public:
 
 	bool GetMouseStatus(int x1, int y1, int x2, int y2);
 	int GetMouseButton();	//¶ƒNƒŠƒbƒN‚³‚ê‚Ä‚¢‚é‚©•Ô‚·
+	static void printMousePoint();
 
 private:
 	int m_mouseButton;

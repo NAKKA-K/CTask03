@@ -1,6 +1,7 @@
 #ifndef _ACTION_BUTTON_H
 #define _ACTION_BUTTON_H
 
+#include"mouse_status.h"
 class ActionButton
 {
 public:

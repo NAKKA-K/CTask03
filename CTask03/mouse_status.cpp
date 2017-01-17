@@ -1,4 +1,5 @@
 #include "mouse_status.h"
+#include"font_list.h"
 #include<DxLib.h>
 
 MouseStatus::MouseStatus() :m_mouseButton(0), m_mouseX(0), m_mouseY(0)
@@ -25,4 +26,12 @@ bool MouseStatus::GetMouseStatus(int x1, int y1, int x2, int y2)
 int MouseStatus::GetMouseButton()
 {
 	return GetMouseInput()&MOUSE_INPUT_LEFT;
+}
+
+void MouseStatus::printMousePoint()
+{
+	int x, y;
+	GetMousePoint(&x, &y);
+	DrawFormatStringToHandle(0, 0, FontList::m_colorGreen, FontList::m_font50, "MouseX:%d,MouseY:%d", x, y);
+	return;
 }

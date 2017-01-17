@@ -6,10 +6,12 @@ public:
 	~FontList();
 
 
-	static int m_colorWhite;
-	static int m_colorWhite1;
-	static int m_colorBlack;
-	static int m_font50;
+	static int m_colorWhite;//îí
+	static int m_colorWhite1;//äDêF
+	static int m_colorBlack;//çï
+	static int m_colorGreen;//óŒ
+	static int m_font50;//size50
+	static int m_font100;//size100
 	static int m_loadFlag;
 };
 

@@ -4,6 +4,7 @@
 #include"menu.h"
 #include"game_main.h"
 #include"font_list.h"
+#include"mouse_status.h"
 
 //int font100;
 
@@ -39,14 +40,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrecInstance, LPSTR lpCmdLine
 			ModeSelectScene();
 			break;
 		case SCENE_LIST:
-
+			HackSelectScene();
 			break;
 
 		//Game
 		case SCENE_GAME:
-			GameMain();
+			//GameMain();
 			break;
 		}
+		MouseStatus::printMousePoint();
 	}
 
 	DxLib_End();

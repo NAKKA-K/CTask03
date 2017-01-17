@@ -48,8 +48,7 @@ void ModeSelect::ModeKey()
 	}
 
 	if (Keyboard_Get(KEY_INPUT_RETURN) == 1) {	//TODO:学習と実践のSCENEに変更する必要あり
-		if (m_selectMode == 0) 	SceneMgr::SetScene(SCENE_GAME);
-		if (m_selectMode == 1) 	SceneMgr::SetScene(SCENE_GAME);
+		SceneMgr::SetScene(SCENE_LIST);
 	}
 	else if (Keyboard_Get(KEY_INPUT_BACK) == 1) {
 		SceneMgr::SetScene(SCENE_GENRE);

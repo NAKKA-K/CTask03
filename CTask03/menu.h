@@ -8,4 +8,6 @@ void GenreSelectScene();
 
 void ModeSelectScene();
 
+void HackSelectScene();
+
 #endif // !_MENU_H
