@@ -6,35 +6,38 @@
 
 int ModeSelect::m_selectMode = 0;
 
-ModeSelect::ModeSelect()
+ModeSelect::ModeSelect()	//必要な画像、色、文字
 {
+	CrGreen = GetColor(50, 200, 80);
 	m_font100 = CreateFontToHandle("メイリオ", 100, 3);
-	m_menuBG = LoadGraph("SecureBack.jpg");
-
+	m_modeG = LoadGraph("tl.png");
+	m_pulse = LoadGraph("pulse.png");
+	m_bin = LoadGraph("bin.png");
 }
+
 ModeSelect::~ModeSelect()
 {
 	DeleteFontToHandle(m_font100);
-	DeleteGraph(m_menuBG);
+	DeleteGraph(m_modeG);
+	DeleteGraph(m_pulse);
+	DeleteGraph(m_bin);
 }
 
 //描写
 void ModeSelect::ModeGraph()
 {
-	DrawGraph(0, 0, m_menuBG, FALSE);
+	//画像表示
+	DrawGraph(0, 0, m_bin, TRUE);
+	DrawGraph(0, 0, m_modeG, TRUE);
+	DrawGraph(0, 0, m_pulse, TRUE);
 
 	//モード項目設定
-	const int MENU_STRING_P[MAX_SELECT_MODE][2] = { { 500,470 },{ 500,820 } };
-	const char* MENU_STRING[MAX_SELECT_MODE] = { "gakusyu","jissen" };	//TODO:名称変更
-
-	//モード項目表示
-	for (int i = 0; i < MAX_SELECT_MODE; i++) {
-		DrawStringToHandle(MENU_STRING_P[i][0], MENU_STRING_P[i][1],
-			MENU_STRING[i], GetColor(200, 200, 200), m_font100);
-	}
+	const int MENU_STRING_P[MAX_SELECT_MODE][2] = { { 80,470 },{ 80,720 } };
+	
+	//選択のアイコン（＊）の表示
 	DrawStringToHandle(MENU_STRING_P[m_selectMode][0] - 50, MENU_STRING_P[m_selectMode][1] - 10,
-		"*", GetColor(200, 200, 200), m_font100);
-
+		"*", CrGreen, m_font100);
+	
 	return;
 }
 //操作

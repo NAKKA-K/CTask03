@@ -14,8 +14,10 @@
 
 void TitleScene()
 {
-	Title title;
 	
+	static Title title;
+	
+
 	title.TitleGraph();
 	title.TitleKey();
 
