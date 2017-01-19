@@ -140,7 +140,3 @@ void HackListIO::SetReadedListFlag(bool readedListFlag)
 	m_readedListFlag = readedListFlag;
 }
 
-int HackList::GetSelectList()
-{
-	return m_selectList;
-}

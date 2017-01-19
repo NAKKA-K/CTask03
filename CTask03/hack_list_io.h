@@ -13,7 +13,6 @@ public:
 	void DrawHackList();	//Draw& Key& Mouse
 	static bool GetReadedListFlag();	//return m_readedListFlag;
 	static void SetReadedListFlag(bool readedListFlag);
-	static int GetSelectList();
 
 private:
 

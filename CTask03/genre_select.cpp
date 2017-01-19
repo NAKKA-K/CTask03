@@ -63,13 +63,5 @@ int GenreSelect::GetFont()
 
 int GenreSelect::GetSelectGenre()
 {
-	if (m_selectGenre == 0) {
-		return SCENE_PROGRAM;
-	}
-	else if (m_selectGenre == 1) {
-		return SCENE_NETWORK;
-	}
-	else if (m_selectGenre == 2) {
-		return SCENE_CIPHER;
-	}
+	return m_selectGenre;
 }
