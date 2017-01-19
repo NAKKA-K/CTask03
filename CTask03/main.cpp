@@ -1,3 +1,16 @@
+/*
+シングルトン
+スマートポインタ:メモリリークをなくすためのもの。参照されなくなったメモリがあれば開放する。
+	uniquePtr:参照先が1つしか作れない
+	sharedPtr:参照先が複数作れる。しかし参照先同士で相互参照が起き、削除されなくなる。そのためにweekPtr
+	weekPtr:複数の参照先の1つが削除されれば、他も同じように削除する
+インターフェース:全て仮想関数(virtual void A() =0;)。いくらでも継承して大丈夫。
+関数:void A();		A()=delete;	A()=0;	A()=default;
+GetSet:ゲッターセッター
+using
+デザインパターン:ゲーム作成？
+*/
+
 #include<DxLib.h>
 #include"Keyboard.h"
 #include"scene_mgr.h"

@@ -12,7 +12,7 @@ char HackListIO::m_questionTitle[32][64];
 int HackListIO::m_questionNum=0;
 bool HackListIO::m_readedListFlag = false;
 int HackListIO::m_hackListBG = 0;
-int HackList::m_selectList = 0;
+//int HackList::m_selectList = 0;
 
 HackListIO::HackListIO()
 {
