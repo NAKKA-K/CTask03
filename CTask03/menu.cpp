@@ -13,11 +13,9 @@
 //extern int m_font100;
 
 void TitleScene()
-{
-	
+{	
 	static Title title;
 	
-
 	title.TitleGraph();
 	title.TitleKey();
 

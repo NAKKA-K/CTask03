@@ -16,13 +16,11 @@ int HackListIO::m_hackListBG = 0;
 
 HackListIO::HackListIO()
 {
-	m_hackListBG = LoadGraph("hacklist.png");
 }
 HackListIO::~HackListIO()
 {
 	m_readedListFlag = false;
-	DeleteGraph(m_hackListBG);
-	//fclose(fp);
+	fclose(fp);
 }
 
 
@@ -40,7 +38,6 @@ bool HackListIO::ReadHackList()
 			"%s%s.txt", m_genreName[GenreSelect::GetSelectGenre()], modeName[ModeSelect::GetSelectMode()]);
 		fopen_s(&fp, fileName, "r");
 		if (fp == NULL) {
-			DrawString(200, 200, "aaaaa", FontList::m_colorWhite);
 
 			return false;
 		}

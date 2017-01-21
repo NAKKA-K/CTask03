@@ -3,40 +3,36 @@
 #include<DxLib.h>
 #include"keyboard.h"
 #include"scene_mgr.h"
+#include"font_list.h"
+#include"menu_graph_list.h"
 
 int ModeSelect::m_selectMode = 0;
 
-ModeSelect::ModeSelect()	//必要な画像、色、文字
+ModeSelect::ModeSelect()
 {
-	CrGreen = GetColor(50, 200, 80);
-	m_font100 = CreateFontToHandle("メイリオ", 100, 3);
-	m_modeG = LoadGraph("tl.png");
-	m_pulse = LoadGraph("pulse.png");
-	m_bin = LoadGraph("bin.png");
+	FontList fontlist;	//クラスのコンストラクタを起動させるためだけに宣言
+	MenuGraphList menugraphlist;
 }
 
 ModeSelect::~ModeSelect()
 {
-	DeleteFontToHandle(m_font100);
-	DeleteGraph(m_modeG);
-	DeleteGraph(m_pulse);
-	DeleteGraph(m_bin);
 }
+
 
 //描写
 void ModeSelect::ModeGraph()
 {
 	//画像表示
-	DrawGraph(0, 0, m_bin, TRUE);
-	DrawGraph(0, 0, m_modeG, TRUE);
-	DrawGraph(0, 0, m_pulse, TRUE);
+	DrawGraph(0, 0, MenuGraphList::m_bin, TRUE);
+	DrawGraph(0, 0, MenuGraphList::m_modeG, TRUE);
+	DrawGraph(0, 0, MenuGraphList::m_pulse, TRUE);
 
 	//モード項目設定
 	const int MENU_STRING_P[MAX_SELECT_MODE][2] = { { 80,470 },{ 80,720 } };
 	
 	//選択のアイコン（＊）の表示
 	DrawStringToHandle(MENU_STRING_P[m_selectMode][0] - 50, MENU_STRING_P[m_selectMode][1] - 10,
-		"*", CrGreen, m_font100);
+		"*", FontList::m_colorGreen1, FontList::m_font100);
 	
 	return;
 }
@@ -58,11 +54,6 @@ void ModeSelect::ModeKey()
 	}
 
 	return;
-}
-
-int ModeSelect::GetFont()
-{
-	return m_font100;
 }
 
 int ModeSelect::GetSelectMode()

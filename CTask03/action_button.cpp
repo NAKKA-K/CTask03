@@ -13,7 +13,7 @@ ActionButton::ActionButton() :m_key(0)
 /*Debug*/
 void ActionButton::DebugButton(ActionButton button)
 {
-	static int routeScene = 0;
+	int routeScene = 0;
 	printfDx("%d", routeScene);
 
 	if (button.ActionInButton(1700, 850, 1800, 900, "ëóêM") == true) {
