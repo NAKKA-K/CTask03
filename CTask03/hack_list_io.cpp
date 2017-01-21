@@ -12,15 +12,21 @@ char HackListIO::m_questionTitle[32][64];
 int HackListIO::m_questionNum=0;
 bool HackListIO::m_readedListFlag = false;
 int HackListIO::m_hackListBG = 0;
-//int HackList::m_selectList = 0;
+int HackListIO::m_selectList = 0;
+int HackListIO::m_questionCount = 0;
+int HackListIO::GetSelectList();
+char HackListIO::GetSelectStr();
+
 
 HackListIO::HackListIO()
 {
+	m_hackListBG = LoadGraph("hacklist.png");
 }
 HackListIO::~HackListIO()
 {
 	m_readedListFlag = false;
-	fclose(fp);
+	DeleteGraph(m_hackListBG);
+	//fclose(fp);
 }
 
 
@@ -38,13 +44,13 @@ bool HackListIO::ReadHackList()
 			"%s%s.txt", m_genreName[GenreSelect::GetSelectGenre()], modeName[ModeSelect::GetSelectMode()]);
 		fopen_s(&fp, fileName, "r");
 		if (fp == NULL) {
+			DrawString(200, 200, "aaaaa", FontList::m_colorWhite);
 
 			return false;
 		}
 
 		//listをすべて読み込み。モード選択からhacklistに到達するたびにm_readedListFlagをfalseにする
-		for (int i = 0; fscanf_s(fp, "%[^,],%d\n",
-			m_questionTitle[i], sizeof(m_questionTitle[0]), &m_questionNum) != EOF; i++) {
+		for (int i = 0; fscanf_s(fp, "%[^,],%d\n", m_questionTitle[i], sizeof(m_questionTitle[0]), &m_questionNum) != EOF; i++, m_questionCount++) {
 		}
 		m_readedListFlag = true;
 	}
@@ -73,56 +79,57 @@ void HackListIO::DrawHackList()
 
 	//問題タイトルを1ページ分表示(座標をワークスペースに代入)
 	//1ページに見える範囲の配列しか表示していない
-	for (int i = drawIdx, x = namex, y = namey; i < m_questionNum || i < (drawIdx + 9); i++) {
+	for (int i = drawIdx, x = namex, y = namey; i < m_questionNum || i < (drawIdx + 10); i++) {
 		DrawStringToHandle(x, y, m_questionTitle[i], FontList::m_colorGreen, FontList::m_font100);
-		y += 150;		//1問ずつ改行
+		y += 120;		//1問ずつ改行
 		if ((i + 1) % 5 == 0) {	//5問分表示したら2列目(i%5だと、iが0だった時に最初から改行されるため+1)
-			x += 960;
+			x += 660;
 			y = 250;
 		}
 	}
 
-	//HACK:Listの上限を超えて別の領域にアクセスしている。if文などで制御求む(drawIdxを使用せずに、別の方式でも問題ない)
-	//HACK:drawIdxとはバグを直すときに取った、救済措置のようなものなのでどこかに穴が潜んでいるかもしれない
-	//HACK:現に選択した問題の識別番号をすぐに特定することができない
 	if (button.ActionInButton(1700, 850, 1750, 900, "→", KEY_INPUT_RIGHT) == true) {
-		if (astx < 960) {//画面左なら右に
-			astx += 960;
+		if (astx < 660) {//画面左なら右に
+			astx += 660;
+			m_selectList += 5;
 		}
-		else {
-			/*dname -= 960;
-			namex = dname;
-			namey = 250;*/
+
+			//問題数を超えて何もないところまで表示してしまうので表示制限
+		else if ((m_selectList + 5) / 5 <= m_questionCount / 5) {
 			drawIdx += 5;
+			m_selectList += 5;
 		}
-		//namey += 150;								//1問ずつ改行
-		//strnum += 1;								//表示した問題数を記憶
+		if (m_selectList > m_questionCount - 1) {
+			asty -= (m_selectList - m_questionCount + 1) * 120;
+			m_selectList = m_selectList - (m_selectList - m_questionCount + 1);
+		}
+
 	}
 	if (button.ActionInButton(1650, 850, 1700, 900, "←",KEY_INPUT_LEFT) == true) {		
-		if (astx > 960) {//画面右なら左に
-			astx -= 960;
+		if (astx > 660) {//画面右なら左に
+			astx -= 660;
+			m_selectList -= 5;
+
 		}
 		else if(drawIdx!=0){
-			/*dname -= 960;
-			namex = dname;
-			namey = 250;*/
 			drawIdx -= 5;
+			m_selectList -= 5;
 		}
-		//dname -= 960;
-		//namex = dname;
-		//namey = 250;
 	}
 	if (button.ActionInButton(1675, 900, 1715, 950, "↓", KEY_INPUT_DOWN) == true) {
-		if (asty < 850)
-			asty += 150;
+		if (asty < 640 && m_selectList < m_questionCount - 1) {
+			asty += 120;
+			m_selectList += 1;
+		}
 	}
 	if (button.ActionInButton(1675, 800, 1715, 850, "↑", KEY_INPUT_UP) == true) {
-		if (asty > 850)	//HACK:適当にコピーしただけなので修正求む
-			asty -= 150;
+		if (asty > 250) {
+			asty -= 120;
+			m_selectList -= 1;
+		}
 	}
-	//HACK:表示場所が適当なので修正求む
-	if (button.ActionInButton(1800, 950, 1900, 1000, "決定", KEY_INPUT_RETURN) == true) {
-		//HACK:選択した問題が分かるように、識別番号を静的メンバ変数に保存すべし(m_selectList)
+	if(button.ActionInButton(1800, 950, 1900, 1000, "決定", KEY_INPUT_RETURN) == true) {
+		SceneMgr::SetScene(SCENE_GAME);
 	}
 	return;
 }
@@ -137,3 +144,12 @@ void HackListIO::SetReadedListFlag(bool readedListFlag)
 	m_readedListFlag = readedListFlag;
 }
 
+int HackListIO::GetSelectList()
+{
+	return m_selectList + 1;
+}
+
+char HackListIO::GetSelectStr()
+{
+	return m_questionTitle[m_selectList];
+}
