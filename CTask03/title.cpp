@@ -7,14 +7,9 @@
 
 Title::Title()	//必要な画像、色、文字
 {
-	FontList fontlist;	//クラスのコンストラクタを起動させるためだけに宣言
-	MenuGraphList menugraphlist;
-
-
 }
 Title::~Title()
 {
-
 }
 
 

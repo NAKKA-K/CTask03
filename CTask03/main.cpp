@@ -61,7 +61,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrecInstance, LPSTR lpCmdLine
 
 		//Game
 		case SCENE_GAME:
-			//GameMain();
+			GameMain();
 			break;
 		}
 		MouseStatus::printMousePoint();

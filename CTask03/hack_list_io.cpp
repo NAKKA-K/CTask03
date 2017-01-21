@@ -12,7 +12,7 @@ char HackListIO::m_questionTitle[32][64];
 int HackListIO::m_questionNum=0;
 bool HackListIO::m_readedListFlag = false;
 int HackListIO::m_hackListBG = 0;
-//int HackList::m_selectList = 0;
+
 
 HackListIO::HackListIO()
 {
@@ -123,6 +123,7 @@ void HackListIO::DrawHackList()
 	//HACK:表示場所が適当なので修正求む
 	if (button.ActionInButton(1800, 950, 1900, 1000, "決定", KEY_INPUT_RETURN) == true) {
 		//HACK:選択した問題が分かるように、識別番号を静的メンバ変数に保存すべし(m_selectList)
+		
 	}
 	return;
 }

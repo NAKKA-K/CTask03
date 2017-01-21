@@ -4,6 +4,7 @@
 
 int FontList::m_font50 = 0;
 int FontList::m_font100 = 0;
+
 int FontList::m_loadFlag = 0;
 int FontList::m_colorBlack = 0;
 int FontList::m_colorWhite = 0;
@@ -19,7 +20,7 @@ FontList::FontList()
 		m_colorBlack = GetColor(0, 0, 0);
 		m_colorGreen = GetColor(0, 255, 0);
 		m_colorGreen1 = GetColor(50, 200, 80);
-		m_font50 = CreateFontToHandle("メイリオ", 50,-1);
+		m_font50 = CreateFontToHandle("メイリオ", 50, -1);
 		m_font100 = CreateFontToHandle("メイリオ", 100, -1);
 
 		//読み込みを制限するためのflag
@@ -29,5 +30,4 @@ FontList::FontList()
 }
 FontList::~FontList()
 {
-	DeleteFontToHandle(m_font50);
 }
