@@ -4,6 +4,7 @@
 #include"mode_select.h"
 #include"font_list.h"
 #include"action_button.h"
+#include"scene_mgr.h"
 #include<string>
 #include<stdio.h>
 #include<DxLib.h>
@@ -14,8 +15,7 @@ bool HackListIO::m_readedListFlag = false;
 int HackListIO::m_hackListBG = 0;
 int HackListIO::m_selectList = 0;
 int HackListIO::m_questionCount = 0;
-int HackListIO::GetSelectList();
-char HackListIO::GetSelectStr();
+
 
 
 HackListIO::HackListIO()
@@ -142,14 +142,4 @@ bool HackListIO::GetReadedListFlag()
 void HackListIO::SetReadedListFlag(bool readedListFlag)
 {
 	m_readedListFlag = readedListFlag;
-}
-
-int HackListIO::GetSelectList()
-{
-	return m_selectList + 1;
-}
-
-char HackListIO::GetSelectStr()
-{
-	return m_questionTitle[m_selectList];
 }
