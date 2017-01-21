@@ -9,9 +9,14 @@ scene_mgr.cpp
 scene_mgr.h
 　SCENEの変更を担当
 
+font_list.cpp
+font_list.h
+　ゲームに使用するfontを集めたclass
+
 menu.cpp
 menu.h
 　メニュー全ての関数を担当(タイトル、ジャンル選択、モード選択、ハックリスト)
+
 　title.cpp
 　title.h
 　　タイトル用のclass
@@ -24,4 +29,14 @@ menu.h
 　mode_select.h
 　　モード選択用のclass
 
+　hack_list_io.cpp
+　hack_list_io.h
+　　hackList用のclass
 
+　game_main.cpp
+　game_main.h
+　　メニューからどのSCENE_GAMEのどの問題に進むかを判定する
+
+　menu_graph.cpp
+　menu_graph.h
+　　メニューで使用する画像を集めたclass
