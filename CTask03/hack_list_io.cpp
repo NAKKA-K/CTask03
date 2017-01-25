@@ -20,7 +20,7 @@ int HackListIO::m_questionCount = 0;
 
 HackListIO::HackListIO()
 {
-	m_hackListBG = LoadGraph("hacklist.png");
+	m_hackListBG = LoadGraph("Image/hacklist.png");
 }
 HackListIO::~HackListIO()
 {
@@ -38,14 +38,13 @@ bool HackListIO::ReadHackList()
 		};
 		char fileName[16];
 
+		memset(m_questionTitle, '\0', sizeof(m_questionTitle));
 
 		//ファイル名の決定とファイルオープン
 		snprintf(fileName, sizeof(fileName),
 			"%s%s.txt", m_genreName[GenreSelect::GetSelectGenre()], modeName[ModeSelect::GetSelectMode()]);
 		fopen_s(&fp, fileName, "r");
 		if (fp == NULL) {
-			DrawString(200, 200, "aaaaa", FontList::m_colorWhite);
-
 			return false;
 		}
 
@@ -80,7 +79,7 @@ void HackListIO::DrawHackList()
 	//問題タイトルを1ページ分表示(座標をワークスペースに代入)
 	//1ページに見える範囲の配列しか表示していない
 	for (int i = drawIdx, x = namex, y = namey; i < m_questionNum || i < (drawIdx + 10); i++) {
-		DrawStringToHandle(x, y, m_questionTitle[i], FontList::m_colorGreen, FontList::m_font100);
+		DrawStringToHandle(x, y, m_questionTitle[i], FontList::m_colorGreen, FontList::m_font50);
 		y += 120;		//1問ずつ改行
 		if ((i + 1) % 5 == 0) {	//5問分表示したら2列目(i%5だと、iが0だった時に最初から改行されるため+1)
 			x += 900;
@@ -118,13 +117,13 @@ void HackListIO::DrawHackList()
 			m_selectList -= 5;
 		}
 	}
-	if (button.ActionInButton(1675, 900, 1715, 950, "↓", KEY_INPUT_DOWN) == true) {
+	if (button.ActionInButton(1670, 900, 1720, 950, "↓", KEY_INPUT_DOWN) == true) {
 		if (asty < 640 && m_selectList < m_questionCount - 1) {
 			asty += 120;
 			m_selectList += 1;
 		}
 	}
-	if (button.ActionInButton(1675, 800, 1715, 850, "↑", KEY_INPUT_UP) == true) {
+	if (button.ActionInButton(1670, 800, 1720, 850, "↑", KEY_INPUT_UP) == true) {
 		if (asty > 250) {
 			asty -= 120;
 			m_selectList -= 1;
