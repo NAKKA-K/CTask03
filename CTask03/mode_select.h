@@ -11,8 +11,9 @@ public:
 
 	void ModeGraph();
 	void ModeKey();
-	int GetFont();
 	static int GetSelectMode();
+
+	static void DebugSetMode(int mode);
 
 private:
 	static int m_selectMode;

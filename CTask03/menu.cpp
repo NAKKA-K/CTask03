@@ -19,10 +19,6 @@ void TitleScene()
 	title.TitleGraph();
 	title.TitleKey();
 
-	/*Debug*/
-	ActionButton button;
-	button.DebugButton(button);
-
 	return;
 }
 
@@ -47,13 +43,13 @@ void ModeSelectScene()
 void HackSelectScene()
 {
 	static HackListIO hackList;
-	if (Keyboard_Get(KEY_INPUT_BACK) == 1) {
-		hackList.SetReadedListFlag(false);	//次にhackListに戻った時、listを読み込み直すようにflagをfalseに
-		SceneMgr::SetScene(SCENE_MODE);
-	}
 
 	hackList.ReadHackList();	//readedFlagがtrueの時は読み込まない
 	hackList.DrawHackList();//描写、ke判定y、mouse判定
 
+	if (Keyboard_Get(KEY_INPUT_BACK) == 1) {
+		hackList.SetReadedListFlag(false);	//次にhackListに戻った時、listを読み込み直すようにflagをfalseに
+		SceneMgr::SetScene(SCENE_MODE);
+	}
 	return;
 }

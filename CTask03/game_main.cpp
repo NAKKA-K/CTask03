@@ -1,6 +1,17 @@
 #include"game_main.h"
 #include"genre_select.h"
 #include"mode_select.h"
+#include"hack_list_io.h"
+
+/*問題を実装しているファイル*/
+//Program
+#include"hack_BOF.h"
+
+//Network
+#include"hack_ARPPoisoning.h"
+
+//Cipher
+
 
 void GameMain()
 {
@@ -23,9 +34,7 @@ void GameMain()
 void ProgramList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
-		switch (0/*hacklistで選んだ識別番号*/) {
-		case 0:
-			break;
+		switch (HackListIO::GetSelectList()) {
 		case 1:
 			break;
 		case 2:
@@ -35,10 +44,9 @@ void ProgramList()
 		}
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
-		switch (0/*hacklistで選んだ識別番号*/) {
-		case 0:
-			break;
-		case 1:
+		switch (HackListIO::GetSelectList()) {
+		case 1:	/*BOF攻撃*/
+			HackBOF();
 			break;
 		case 2:
 			break;
@@ -52,9 +60,7 @@ void ProgramList()
 void NetworkList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
-		switch (0/*hacklistで選んだ識別番号*/) {
-		case 0:
-			break;
+		switch (HackListIO::GetSelectList()) {
 		case 1:
 			break;
 		case 2:
@@ -64,13 +70,11 @@ void NetworkList()
 		}
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
-		switch (0/*hacklistで選んだ識別番号*/) {
-		case 0:	/*セッションハイジャック*/
-
+		switch (HackListIO::GetSelectList()) {
+		case 1:	/*セッションハイジャック*/
 			break;
-		case 1:
-			break;
-		case 2:
+		case 2:	/*ARPキャッシュポイズニング*/
+			HackARP();
 			break;
 		case 3:
 			break;
@@ -83,8 +87,6 @@ void CipherList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
 		switch (0/*hacklistで選んだ識別番号*/) {
-		case 0:
-			break;
 		case 1:
 			break;
 		case 2:
@@ -95,8 +97,6 @@ void CipherList()
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
 		switch (0/*hacklistで選んだ識別番号*/) {
-		case 0:
-			break;
 		case 1:
 			break;
 		case 2:

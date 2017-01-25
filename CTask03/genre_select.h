@@ -13,6 +13,8 @@ public:
 	void GenreKey();
 	static int GetSelectGenre();
 
+	static void DebugSetGenre(int genre);
+
 private:
 	static int m_selectGenre;
 };

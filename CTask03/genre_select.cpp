@@ -53,3 +53,9 @@ int GenreSelect::GetSelectGenre()
 {
 	return m_selectGenre;
 }
+
+void GenreSelect::DebugSetGenre(int genre)
+{
+	m_selectGenre = genre;
+	return;
+}

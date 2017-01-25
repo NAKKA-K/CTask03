@@ -60,3 +60,9 @@ int ModeSelect::GetSelectMode()
 {
 	return m_selectMode;
 }
+
+void ModeSelect::DebugSetMode(int mode)
+{
+	m_selectMode = mode;
+	return;
+}

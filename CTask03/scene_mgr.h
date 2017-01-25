@@ -8,10 +8,8 @@ enum SCENE {
 	SCENE_MODE,		//モード選択画面
 	SCENE_LIST,			//?問題選択画面
 
-	SCENE_GAME
-	//SCENE_PROGRAM,	//プログラムの脆弱性に対する攻守が学べるモード
-	//SCENE_NETWORK,	//NetWorkの脆弱性に対する攻守が学べるモード
-	//SCENE_CIPHER,		//暗号化、復元が学べるモード
+	SCENE_GAME,
+	SCENE_DEBUG
 };
 
 
