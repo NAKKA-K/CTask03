@@ -20,8 +20,7 @@ int HackListIO::m_questionCount = 0;
 
 HackListIO::HackListIO()
 {
-	m_readedListFlag = false;
-	m_hackListBG = LoadGraph("Image/hacklist.png");
+	m_hackListBG = LoadGraph("hacklist.png");
 }
 HackListIO::~HackListIO()
 {
@@ -39,13 +38,14 @@ bool HackListIO::ReadHackList()
 		};
 		char fileName[16];
 
-		memset(m_questionTitle, '\0', sizeof(m_questionTitle));
 
 		//ファイル名の決定とファイルオープン
 		snprintf(fileName, sizeof(fileName),
 			"%s%s.txt", m_genreName[GenreSelect::GetSelectGenre()], modeName[ModeSelect::GetSelectMode()]);
 		fopen_s(&fp, fileName, "r");
 		if (fp == NULL) {
+			DrawString(200, 200, "aaaaa", FontList::m_colorWhite);
+
 			return false;
 		}
 
@@ -80,26 +80,26 @@ void HackListIO::DrawHackList()
 	//問題タイトルを1ページ分表示(座標をワークスペースに代入)
 	//1ページに見える範囲の配列しか表示していない
 	for (int i = drawIdx, x = namex, y = namey; i < m_questionNum || i < (drawIdx + 10); i++) {
-		DrawStringToHandle(x, y, m_questionTitle[i], FontList::m_colorGreen, FontList::m_font50);
+		DrawStringToHandle(x, y, m_questionTitle[i], FontList::m_colorGreen, FontList::m_font100);
 		y += 120;		//1問ずつ改行
 		if ((i + 1) % 5 == 0) {	//5問分表示したら2列目(i%5だと、iが0だった時に最初から改行されるため+1)
-			//x += 660;
-			x += 930;
+			x += 900;
 			y = 250;
 		}
 	}
 
 	if (button.ActionInButton(1700, 850, 1750, 900, "→", KEY_INPUT_RIGHT) == true) {
-		if (astx < 660) {//画面左なら右に
-			//astx += 660;
-			astx+=930;
-			m_selectList += 5;
-		}
+		if (m_questionCount > 5) {	//問題数が5以下なら左右に動かない
+			if (astx < 900 ) {//画面左なら右に
+				astx += 900;
+				m_selectList += 5;
+			}
 
 			//問題数を超えて何もないところまで表示してしまうので表示制限
-		else if ((m_selectList + 5) / 5 <= m_questionCount / 5) {
-			drawIdx += 5;
-			m_selectList += 5;
+			else if ((m_selectList + 5) / 5 <= m_questionCount / 5) {
+				drawIdx += 5;
+				m_selectList += 5;
+			}
 		}
 		if (m_selectList > m_questionCount - 1) {
 			asty -= (m_selectList - m_questionCount + 1) * 120;
@@ -108,9 +108,8 @@ void HackListIO::DrawHackList()
 
 	}
 	if (button.ActionInButton(1650, 850, 1700, 900, "←",KEY_INPUT_LEFT) == true) {		
-		if (astx > 660) {//画面右なら左に
-			//astx -= 660;
-			astx -= 930;
+		if (astx > 900) {//画面右なら左に
+			astx -= 900;
 			m_selectList -= 5;
 
 		}
@@ -150,10 +149,4 @@ void HackListIO::SetReadedListFlag(bool readedListFlag)
 int HackListIO::GetSelectList()
 {
 	return m_selectList+1;
-}
-
-void HackListIO::DebugSetList(int list)
-{
-	m_selectList = list;
-	return;
 }
