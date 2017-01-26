@@ -9,8 +9,11 @@
 
 //Network
 #include"hack_ARPPoisoning.h"
+#include"hack_SYNScan.h"
 
 //Cipher
+#include"hack_Dictionary.h"
+#include"hack_BruteForce.h"
 
 
 void GameMain()
@@ -77,6 +80,7 @@ void NetworkList()
 			HackARP();
 			break;
 		case 3:
+			HackSYN();
 			break;
 		}
 	}
@@ -86,7 +90,7 @@ void NetworkList()
 void CipherList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
-		switch (0/*hacklist‚Å‘I‚ñ‚¾¯•Ê”Ô†*/) {
+		switch (HackListIO::GetSelectList()) {
 		case 1:
 			break;
 		case 2:
@@ -96,12 +100,15 @@ void CipherList()
 		}
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
-		switch (0/*hacklist‚Å‘I‚ñ‚¾¯•Ê”Ô†*/) {
-		case 1:
+		switch (HackListIO::GetSelectList()) {
+		case 1:	/*«‘UŒ‚*/
+			HackDictionary();
 			break;
-		case 2:
+		case 2:	/*BruteForceUŒ‚1(‘“–‚½‚è)*/
+			HackBrute1();
 			break;
-		case 3:
+		case 3:	/*BruteForceUŒ‚2(‘“–‚½‚è)*/
+			HackBrute2();
 			break;
 		}
 	}
