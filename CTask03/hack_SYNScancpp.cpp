@@ -5,6 +5,7 @@
 #include"menu_graph_list.h"
 #include<DxLib.h>
 
+
 void HackSYN()
 {
 	static SYN *syn;
@@ -34,6 +35,9 @@ SYN::SYN() :m_scene(0), m_timer(0), m_alpha(0), bright(255)
 	//画像読み込み
 	m_hackBG = LoadGraph("Image/Q_gamen.png");
 	m_webAppG = LoadGraph("Image/webApp3.png");
+	m_pcG = LoadGraph("Image/pc.png");
+	m_arrowRedG = LoadGraph("Image/arrowRed.png");
+	m_arrowBlueG= LoadGraph("Image/arrowBlue.png");
 
 
 	SetKeyInputStringColor(FontList::m_colorBlack, FontList::m_colorBlack, FontList::m_colorBlack, FontList::m_colorBlack,
@@ -48,63 +52,65 @@ SYN::~SYN()
 	m_createdFlag = false;
 	//画像消去
 	DeleteGraph(m_hackBG);
+	DeleteGraph(m_webAppG);
+	DeleteGraph(m_pcG);
+	DeleteGraph(m_arrowRedG);
+	DeleteGraph(m_arrowBlueG);
 }
 
 void SYN::SYNGraph()
 {
+	const float PI = 3.141592653589793238462643383279;
+
 	DrawGraph(0, 0, m_hackBG, FALSE);
 	DrawStringToHandle(100, 45, "Network", FontList::m_colorGreen1, FontList::m_font75);
 	DrawStringToHandle(550, 45, "SYNスキャン", FontList::m_colorGreen1, FontList::m_font100);
 
 
+	DrawExtendGraph(20, 350, 700, 700, m_pcG, TRUE);
+	DrawExtendGraph(1250, 350, 1900, 700, m_pcG, TRUE);
 
-/*	
-*/
-	DrawBox(100, 200, 650, 600, FontList::m_colorWhite, TRUE);
-	DrawBox(1250, 200, 1800, 600, FontList::m_colorWhite, TRUE);
 	if (m_scene >= 2) {
-		DrawStringToHandle(850, 300, "SYN", FontList::m_colorGreen1, FontList::m_font50);
+		DrawRotaGraph(955, 360, 1.6f, PI/180*38, m_arrowRedG, TRUE);
+		DrawStringToHandle(900, 300, "SYN", FontList::m_colorGreen1, FontList::m_font50);
 	}
 	if (m_scene >= 4) {
-		DrawStringToHandle(800, 450, "SYN/ACK", FontList::m_colorGreen1, FontList::m_font50);
+		DrawGraph(800, 500, m_arrowBlueG, TRUE);
+		DrawStringToHandle(850, 450, "SYN/ACK", FontList::m_colorGreen1, FontList::m_font50);
 	}
 	if (m_scene >= 6) {
-		DrawBox(790, 600, 1100, 700, FontList::m_colorGreen1, TRUE);
+		DrawRotaGraph(955, 690, 1.6f, PI / 180 * 38, m_arrowRedG, TRUE);
+		DrawBox(810, 600, 1110, 660, FontList::m_colorGreen1, TRUE);
 	}
-
+	
 	if (m_scene == 0) {}
 	else if (m_scene == 1) {
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);//tomフェードイン
-		//→
-		DrawStringToHandle(850, 300, "SYN", FontList::m_colorGreen1, FontList::m_font50);
+		DrawRotaGraph(955, 360, 1.6f, PI / 180 * 38, m_arrowRedG, TRUE);//→
+		DrawStringToHandle(900, 300, "SYN", FontList::m_colorGreen1, FontList::m_font50);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		if (m_alpha <= 255) m_alpha += 2;
 	}
-	else if (m_scene==2) {
-		m_alpha = 0;
-	}
+	else if (m_scene==2) m_alpha = 0;
 	else if (m_scene == 3) {
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);//tomフェードイン
-		//←
-		DrawStringToHandle(800, 450, "SYN/ACK", FontList::m_colorGreen1, FontList::m_font50);
+		DrawGraph(800, 500, m_arrowBlueG, TRUE);//←
+		DrawStringToHandle(850, 450, "SYN/ACK", FontList::m_colorGreen1, FontList::m_font50);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		if (m_alpha <= 255) m_alpha += 2;
 	}
-	else if (m_scene == 4) {
-		m_alpha = 0;
-	}
+	else if (m_scene == 4) m_alpha = 0;
 	else if (m_scene == 5) {
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);//tomフェードイン
-		//→
-		DrawBox(790, 600, 1100, 700, FontList::m_colorGreen1, TRUE);
-
+		DrawRotaGraph(955, 690, 1.6f, PI / 180 * 38, m_arrowRedG, TRUE);//→
+		DrawBox(810, 600, 1110, 660, FontList::m_colorGreen1, TRUE);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		if (m_alpha <= 255) m_alpha += 2;
 	}
 	else if (m_scene == 6) {
 		DrawStringToHandle(50, 930, "ステルススキャンをするために、\n相手サーバに送るべきフラグをセットしろ！", FontList::m_colorGreen1, FontList::m_font50);
 		SetFontSize(50);
-		if (KeyInputSingleCharString(800, 610, 7, str, FALSE) == 1) {
+		if (KeyInputSingleCharString(870, 610, 7, str, FALSE) == 1) {
 			if (strcmp(str, "RST") == 0) m_scene = 7;	//正解
 			else if (strcmp(str, "ACK") == 0) m_scene = 11;
 			else m_scene = 15;	//不正解

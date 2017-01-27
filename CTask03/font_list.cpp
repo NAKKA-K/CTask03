@@ -11,6 +11,7 @@ int FontList::m_loadFlag = 0;
 int FontList::m_colorBlack = 0;
 int FontList::m_colorWhite = 0;
 int FontList::m_colorWhite1 = 0;
+int FontList::m_colorOrange = 0;
 int FontList::m_colorGreen = 0;
 int FontList::m_colorGreen1 = 0;
 int FontList::m_colorBlue = 0;
@@ -21,6 +22,7 @@ FontList::FontList()
 		m_colorWhite = GetColor(255, 255, 255);
 		m_colorWhite1 = GetColor(100, 100, 100);
 		m_colorBlack = GetColor(0, 0, 0);
+		m_colorOrange = GetColor(183, 65, 14);
 		m_colorGreen = GetColor(0, 255, 0);
 		m_colorGreen1 = GetColor(50, 200, 80);
 		m_colorBlue = GetColor(0,0,255);

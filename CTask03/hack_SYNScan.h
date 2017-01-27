@@ -23,6 +23,9 @@ private:
 
 	int m_hackBG;
 	int m_webAppG;
+	int m_pcG;
+	int m_arrowBlueG;
+	int m_arrowRedG;
 };
 
 void HackSYN();

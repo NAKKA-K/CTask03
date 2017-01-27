@@ -11,6 +11,7 @@ public:
 	static int m_colorWhite;//白
 	static int m_colorWhite1;//灰色
 	static int m_colorBlack;//黒
+	static int m_colorOrange;//暗いオレンジ
 	static int m_colorGreen;//緑
 	static int m_colorGreen1;//薄緑(ジャンル選択等で使用)
 	static int m_colorBlue;
