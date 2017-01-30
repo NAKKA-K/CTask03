@@ -132,7 +132,7 @@ void ARP::ARPGraph()
 		DrawStringToHandle(300 + 5, 320 + 105, "MAC: ", FontList::m_colorBlue, FontList::m_font30);
 		DrawStringToHandle(1150 + 5, 320 + 105, "MAC: ", FontList::m_colorBlue, FontList::m_font30);
 
-		DrawStringToHandle(50, 930, "2人のARPキャッシュのMACを書き換えて\n通信を盗聴しろ！", FontList::m_colorGreen1, FontList::m_font50);
+		DrawStringToHandle(50, 930, "2人のARPキャッシュのMACを\n書き換えて通信を盗聴しろ！", FontList::m_colorGreen1, FontList::m_font50);
 		SetFontSize(50);
 		if (KeyInputSingleCharString(1200, 960, 20, str, FALSE) == 1) {
 			if (strcmp(str, "00:00:00:AB:AB:AB") == 0) m_scene = 5;	//正解

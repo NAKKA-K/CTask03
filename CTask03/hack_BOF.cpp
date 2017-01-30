@@ -166,7 +166,7 @@ void BOF::BOFGraph()
 		if (webAppP[0]>10) webAppP[0] -= 2;//ƒTƒCƒg‚ÌŠg‘å
 		if (webAppP[1]>160) webAppP[1] -= 2;
 		if (webAppP[2]<1500) webAppP[2] += 6;
-		if (webAppP[3]<900) webAppP[3] += 4;
+		if (webAppP[3]<900) webAppP[3] += 4;	
 	}
 	else if (m_scene == 14) {
 		DrawExtendGraph(tomSP2[0]-5, tomSP2[1]-5, tomSP2[0] +400, tomSP2[1] + 100, m_balloonG[1], TRUE);

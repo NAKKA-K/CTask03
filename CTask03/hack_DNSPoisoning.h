@@ -21,9 +21,8 @@ private:
 	static bool m_createdFlag;
 
 	int m_hackBG;
-	int m_bobG;
-	int m_cathyG;
-	int m_tomG;
+	int m_pcG;
+	int m_arrowBlueG;
 
 };
 

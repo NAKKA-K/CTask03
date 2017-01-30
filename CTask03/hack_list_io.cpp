@@ -34,15 +34,15 @@ bool HackListIO::ReadHackList()
 {
 	if (m_readedListFlag == false) {
 		const char *modeName[2]{
-			"_g","_j"
+			"_j","_g"
 		};
-		char fileName[16];
+		char fileName[32];
 
 		memset(m_questionTitle, '\0', sizeof(m_questionTitle));
 
 		//ファイル名の決定とファイルオープン
 		snprintf(fileName, sizeof(fileName),
-			"%s%s.txt", m_genreName[GenreSelect::GetSelectGenre()], modeName[ModeSelect::GetSelectMode()]);
+			"HackList/%s%s.txt", m_genreName[GenreSelect::GetSelectGenre()], modeName[ModeSelect::GetSelectMode()]);
 		fopen_s(&fp, fileName, "r");
 		if (fp == NULL) {
 			return false;

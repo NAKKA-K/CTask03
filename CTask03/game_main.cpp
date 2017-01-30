@@ -6,10 +6,16 @@
 /*問題を実装しているファイル*/
 //Program
 #include"hack_BOF.h"
+#include"hack_SQLInjec.h"
+#include"hack_XSS.h"
 
 //Network
 #include"hack_ARPPoisoning.h"
 #include"hack_SYNScan.h"
+#include"hack_DNSPoisoning.h"
+#include"hack_TargetedMailAttack.h"
+#include"hack_sessionHijack.h"
+#include"hack_idleScan.h"
 
 //Cipher
 #include"hack_Dictionary.h"
@@ -38,18 +44,23 @@ void ProgramList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
 		switch (HackListIO::GetSelectList()) {
-		case 1:
+		case 1:	/*BOF攻撃*/
+			HackBOF();
 			break;
-		case 2:
+		case 2:	/*SQLインジェクション*/
+			HackSQL();
 			break;
-		case 3:
+		case 3:	/*XSS*/
+			//HackXSS();
+			break;
+		case 4:
+
 			break;
 		}
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
 		switch (HackListIO::GetSelectList()) {
-		case 1:	/*BOF攻撃*/
-			HackBOF();
+		case 1:
 			break;
 		case 2:
 			break;
@@ -64,23 +75,39 @@ void NetworkList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
 		switch (HackListIO::GetSelectList()) {
-		case 1:
+		case 1:	/*セッションハイジャック*/
+			HackHijack();
 			break;
-		case 2:
+		case 2:	/*ARPキャッシュポイズニング*/
+			HackARP();
 			break;
-		case 3:
+		case 3:	/*SYNスキャン*/
+			HackSYN();
+			break;
+		case 4:	/*DNSキャッシュポイズニング*/
+			HackDNS();
+			break;
+		case 5:	/*標的型メール攻撃*/
+			TargetedMailAttack(1);
+			break;
+		case 6:
+			TargetedMailAttack(2);
+			break;
+		case 7:
+			TargetedMailAttack(3);
+			break;
+		case 8:	/*アイドルスキャン*/
+			HackIdle();
 			break;
 		}
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
 		switch (HackListIO::GetSelectList()) {
-		case 1:	/*セッションハイジャック*/
+		case 1:
 			break;
-		case 2:	/*ARPキャッシュポイズニング*/
-			HackARP();
+		case 2:
 			break;
 		case 3:
-			HackSYN();
 			break;
 		}
 	}
@@ -91,16 +118,6 @@ void CipherList()
 {
 	if (ModeSelect::GetSelectMode() == 0) {
 		switch (HackListIO::GetSelectList()) {
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		}
-	}
-	else if (ModeSelect::GetSelectMode() == 1) {
-		switch (HackListIO::GetSelectList()) {
 		case 1:	/*辞書攻撃*/
 			HackDictionary();
 			break;
@@ -109,6 +126,16 @@ void CipherList()
 			break;
 		case 3:	/*BruteForce攻撃2(総当たり)*/
 			HackBrute2();
+			break;
+		}
+	}
+	else if (ModeSelect::GetSelectMode() == 1) {
+		switch (HackListIO::GetSelectList()) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
 			break;
 		}
 	}
