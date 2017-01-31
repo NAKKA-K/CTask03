@@ -2,8 +2,12 @@
 #include"genre_select.h"
 #include"mode_select.h"
 #include"hack_list_io.h"
+#include"scene_mgr.h"
 
 /*問題を実装しているファイル*/
+//Learn
+#include"learn.h"
+
 //Program
 #include"hack_BOF.h"
 #include"hack_SQLInjec.h"
@@ -25,12 +29,13 @@
 void GameMain()
 {
 	//選択したジャンルとモードによって分岐
+	if (ModeSelect::GetSelectMode() == 1) HackLearn();
 	//Program
-	if (GenreSelect::GetSelectGenre() == 0) ProgramList();
+	else if (GenreSelect::GetSelectGenre() == 0) ProgramList();
 	//Network
-	if (GenreSelect::GetSelectGenre() == 1) NetworkList();
+	else if (GenreSelect::GetSelectGenre() == 1) NetworkList();
 	//Cipher
-	if (GenreSelect::GetSelectGenre() == 2) CipherList();
+	else if (GenreSelect::GetSelectGenre() == 2) CipherList();
 
 	return;
 }
@@ -49,24 +54,15 @@ void ProgramList()
 			break;
 		case 2:	/*SQLインジェクション*/
 			HackSQL();
+			break;	
+		default:
+			SceneMgr::SetScene(SCENE_LIST);
 			break;
-		case 3:	/*XSS*/
-			//HackXSS();
-			break;
-		case 4:
-
-			break;
+		/*XSS*/ //HackXSS();
 		}
 	}
-	else if (ModeSelect::GetSelectMode() == 1) {
-		switch (HackListIO::GetSelectList()) {
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		}
+	else {
+		//HackLearn();
 	}
 	return;
 }
@@ -99,6 +95,9 @@ void NetworkList()
 		case 8:	/*アイドルスキャン*/
 			HackIdle();
 			break;
+		default:
+			SceneMgr::SetScene(SCENE_LIST);
+			break;
 		}
 	}
 	else if (ModeSelect::GetSelectMode() == 1) {
@@ -126,6 +125,9 @@ void CipherList()
 			break;
 		case 3:	/*BruteForce攻撃2(総当たり)*/
 			HackBrute2();
+			break;
+		default:
+			SceneMgr::SetScene(SCENE_LIST);
 			break;
 		}
 	}
